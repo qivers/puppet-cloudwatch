@@ -1,4 +1,4 @@
-# Class: cloudwatch
+# Class: cloudwatch_agent
 # ===========================
 #
 # Installs AWS Cloudwatch Monitoring Scripts and sets up a cron entry to push
@@ -108,7 +108,7 @@
 #
 # Copyright 2018 Joe Nyland, unless otherwise noted.
 #
-class cloudwatch (
+class cloudwatch_agent (
   $access_key              = undef,
   $secret_key              = undef,
   $credential_file         = undef,
@@ -279,7 +279,7 @@ class cloudwatch (
           ${aggregated_val} ${auto_scaling_val}"
 
   if ($manage_dependencies) {
-    cron { 'cloudwatch':
+    cron { 'cloudwatch_agent':
       ensure   => present,
       name     => 'Push extra metrics to Cloudwatch',
       minute   => $cron_min,
@@ -294,7 +294,7 @@ class cloudwatch (
       ]
     }
   } else {
-    cron { 'cloudwatch':
+    cron { 'cloudwatch_agent':
       ensure   => present,
       name     => 'Push extra metrics to Cloudwatch',
       minute   => $cron_min,
